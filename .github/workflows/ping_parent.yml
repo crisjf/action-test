@@ -11,7 +11,6 @@ jobs:
       - name: Emit repository_dispatch
         uses: mvasigh/dispatch-action@main
         with:
-          # You should create a personal access token and store it in your repository
           token: ${{ secrets.API_TOKEN_GITHUB }}
           repo: action-target
           owner: crisjf
