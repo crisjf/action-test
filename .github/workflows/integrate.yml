@@ -19,5 +19,16 @@ jobs:
         with:
           source-directory: 'docs/markdown'
           destination-github-username: 'crisjf'
-          destination-repository-name: 'action-target/tree/master/docs/markdown'
+          destination-repository-name: 'action-target'
           user-email: crisjf@mit.edu
+
+      - name: Pushes test file
+        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source_file: 'docs/markdown'
+          destination_repo: 'crisjf/action-target'
+          destination_folder: 'docs/markdown'
+          user_email: 'crisjf@mit.edu'
+          user_name: 'crisjf'
