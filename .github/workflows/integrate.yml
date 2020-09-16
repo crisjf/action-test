@@ -19,5 +19,5 @@ jobs:
         with:
           source-directory: 'docs/markdown'
           destination-github-username: 'crisjf'
-          destination-repository-name: 'action-target'
+          destination-repository-name: 'action-target/tree/master/docs/markdown'
           user-email: crisjf@mit.edu
