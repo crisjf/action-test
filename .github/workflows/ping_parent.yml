@@ -15,4 +15,4 @@ jobs:
           token: ${{ secrets.API_TOKEN_GITHUB }}
           repo: action-target
           owner: crisjf
-          event_type: Update docs
+          event_type: docs_update
