@@ -10,16 +10,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install requirements
-        run: apt-get install python3-sphinx && pip3 install sphinx-rtd-theme && pip3 install -r requirements.txt && python3 setup.py install
-      - name: Update DOCS
-        run: echo hello
-      - name: Commit changes
-        uses: EndBug/add-and-commit@v4
+      - name: Doc html update
+        uses: ammaraskar/sphinx-action@master
         with:
-          author_name: crisjf
-          author_email: crisjf@mit.edu
-          message: "Auto doc update"
-          add: "."
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          build-command: "sphinx-build -b html ./ ../../docs"
+          docs-folder: "docsource/source"
+      - name: Doc MD update
+        uses: ammaraskar/sphinx-action@master
+        with:
+          build-command: "sphinx-build -M markdown ./ ../../docs"
+          docs-folder: "docsource/source"
+      - name: Move README and prepare docusaurus
+        run: printf "\n\n" >> ../../docs/markdown/README.md && mv ../../docs/markdown/README.md ../../README.md && cat ../../README.md  ../../docs/markdown/classes.md > ../../docs/markdown/docusaurus.md
+
