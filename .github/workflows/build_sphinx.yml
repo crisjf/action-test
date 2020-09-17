@@ -24,7 +24,8 @@ jobs:
           docs-folder: "docsource/source"
           pre-build-command: "pip3 install setuptools && pip3 install sphinx-markdown-builder"
       - name: Move README and prepare docusaurus
-        run: pwd && ls -l && printf "\n\n" >> docs/markdown/README.md && mv docs/markdown/README.md README.md && cat README.md  docs/markdown/classes.md > docs/markdown/docusaurus.md
+        run: pwd && ls -l && cd docs/markdown && ls -l
+         # && printf "\n\n" >> docs/markdown/README.md && mv docs/markdown/README.md README.md && cat README.md  docs/markdown/classes.md > docs/markdown/docusaurus.md
       - name: Commit changes
         uses: EndBug/add-and-commit@v4
         with:
