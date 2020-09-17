@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Setup
+      - name: Setup markdown builder
         run: pip3 install setuptools && pip3 install sphinx-markdown-builder
       - name: Doc html update
         uses: ammaraskar/sphinx-action@master
@@ -24,4 +24,12 @@ jobs:
           docs-folder: "docsource/source"
       - name: Move README and prepare docusaurus
         run: printf "\n\n" >> ../../docs/markdown/README.md && mv ../../docs/markdown/README.md ../../README.md && cat ../../README.md  ../../docs/markdown/classes.md > ../../docs/markdown/docusaurus.md
-
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v4
+        with:
+          author_name: crisjf
+          author_email: crisjf@mit.edu
+          message: "Commit documentation changes"
+          add: "."
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
