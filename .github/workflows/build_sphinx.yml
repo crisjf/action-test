@@ -1,0 +1,25 @@
+name: Build Sphinx docs
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Sphinx docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install requirements
+        run: apt-get install python3-sphinx && pip3 install sphinx-rtd-theme && pip3 install -r requirements.txt && python3 setup.py install
+      - name: Update DOCS
+        run: echo hello
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v4
+        with:
+          author_name: crisjf
+          author_email: crisjf@mit.edu
+          message: "Auto doc update"
+          add: "."
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
