@@ -24,7 +24,7 @@ jobs:
           token: ${{ secrets.API_TOKEN_GITHUB }}
           path: NNNOMINATE
       - name: Copy models
-        run: pwd && ls -la ../ && ls -la ../../ && mkdir -p models/ && cp ../NNNOMINATE/results/models/ models/
+        run: pwd && ls -la && ls -la ../ && ls -la ../../ && mkdir -p models/ && cp ../NNNOMINATE/results/models/ models/
       - name: Commit changes
         uses: EndBug/add-and-commit@v4
         with:
