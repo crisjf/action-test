@@ -1,0 +1,32 @@
+# Description: Workflow that pulls all trained models from crisjf/NNNOMINATE
+# Author: Cristian Jara-Figueroa, Phd Student MIT Media Lab
+# Last updated: September 21, 2020
+
+name: Pull models
+
+on:
+  schedule:
+    - cron:  '0 0 * * *' # at midnight every day
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        with:
+          repository: 'crisjf/NNNOMINATE'
+          token: ${{ secrets.API_TOKEN_GITHUB }}
+      - name: Copy models
+        run: mkdir -p models/ && cp ../NNNOMINATE/results/models/ models/
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v4
+        with:
+          author_name: crisjf
+          author_email: crisjf@mit.edu
+          message: "Models auto updated using action"
+          add: "models/."
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
