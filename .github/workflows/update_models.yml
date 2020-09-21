@@ -13,13 +13,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
       - name: Checkout NNNOMINATE
         uses: actions/checkout@v2
         with:
           repository: 'crisjf/NNNOMINATE'
           token: ${{ secrets.API_TOKEN_GITHUB }}
+      - name: Checkout repo
+        uses: actions/checkout@v2
       - name: Copy models
         run: ls -la && mkdir -p models/ && cp ../NNNOMINATE/results/models/ models/
       - name: Commit changes
